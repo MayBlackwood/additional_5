@@ -5,7 +5,9 @@ module.exports =function check(str, bracketsConfig) {
   let lenB = bracketsConfig.length;
   let lenA = strArr.length;
   
-  
+  if (strArr.length % 2 !== 0) {
+    return false;
+  }
   
   for (let a = 0; a < lenA; a++){
       for (let i = 0; i < lenB; i++){
