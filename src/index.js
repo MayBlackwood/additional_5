@@ -1,34 +1,27 @@
 module.exports =function check(str, bracketsConfig) {
-  let validation = [];
-  let strArr = str.split('');
-  
-  let lenB = bracketsConfig.length;
-  let lenA = strArr.length;
-  
-  if (strArr.length % 2 !== 0) {
-    return false;
-  }
-  
-  for (let a = 0; a < lenA; a++){
-      for (let i = 0; i < lenB; i++){
-              if (strArr[0] === bracketsConfig[i][1]){
-                  return false;
-              }
-              if (strArr[a] === bracketsConfig[i][0]){
-                  validation.push(1);
-              } else {
-                  validation.pop()
-              }
-  
-          
-      }
-  
-  }
-  
-  if (validation.join('')===''){
-      return true;
-  }else {
-      return false;
-  }
-  
-  }   
+
+str = str.trim().split(''); 
+str = str.filter(el => { 
+return el !== ' '; 
+}) 
+let prov = 0; 
+while (str.length !== 0 && prov !== str.length){ 
+prov = str.length; 
+str.forEach((el, index, arr) => { 
+bracketsConfig.forEach(brackets => { 
+if (el === brackets[0].trim() && arr[index + 1] === brackets[1].trim()) { 
+arr[index] = true; 
+arr[index + 1] = true; 
+} 
+}) 
+}) 
+str = str.filter(el => { 
+return el !== true; 
+}) 
+} 
+
+if(str.length === 0) 
+return true; 
+else 
+return false; 
+}
